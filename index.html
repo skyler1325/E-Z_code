@@ -19,11 +19,16 @@
         document.getElementById('jsonInput').addEventListener('input', function () {
             const status = document.getElementById('status');
             try {
-                JSON.parse(this.value);
-                status.textContent = "Valid JSON ✅";
-                status.className = "valid";
+                const json = JSON.parse(this.value);
+                if ('title' in json && 'main-text' in json) {
+                    status.textContent = "Valid JSON ✅ (Includes 'title' and 'main-text')";
+                    status.className = "valid";
+                } else {
+                    status.textContent = "Invalid JSON ❌ (Must include 'title' and 'main-text')";
+                    status.className = "invalid";
+                }
             } catch {
-                status.textContent = "Invalid JSON ❌";
+                status.textContent = "Invalid JSON ❌ (Syntax error)";
                 status.className = "invalid";
             }
         });
