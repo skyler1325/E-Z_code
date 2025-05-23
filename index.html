@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Editor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        textarea { width: 100%; height: 200px; font-family: monospace; }
+        .valid { color: green; }
+        .invalid { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Simple JSON Editor</h2>
+    <textarea id="jsonInput" placeholder="Enter JSON here..."></textarea>
+    <p id="status"></p>
+    <script>
+        document.getElementById('jsonInput').addEventListener('input', function () {
+            const status = document.getElementById('status');
+            try {
+                JSON.parse(this.value);
+                status.textContent = "Valid JSON ✅";
+                status.className = "valid";
+            } catch {
+                status.textContent = "Invalid JSON ❌";
+                status.className = "invalid";
+            }
+        });
+    </script>
+</body>
+</html>
